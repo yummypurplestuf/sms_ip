@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # Author: Jared R. Luellen
 # Sends current IP address as sms to a phone number on boot
 # Add to cron by: sudo crontab -e
@@ -9,7 +10,10 @@ from googlevoice import Voice
 #from googlevoice.util import input
 import netifaces
 import sys
+import time
 
+
+time.sleep(10) # Allows for the system to boot and obtain an IP address
 # netifaces is not a built in Python Library: easy_install netifaces
 interfaces = netifaces.interfaces()
 voice = Voice()
@@ -29,7 +33,9 @@ if connection == True:
 		# email@gmail.com
 		# YOUR_PASSWORD
 		# 3333333333, 3333333333, 3333333333
-		user_info = open('user_info.txt', 'r')
+
+		# MUST SET ABSOLUTE PATH FOR user_info.txt 
+		user_info = open('/home/pi/sms_ip/user_info.txt', 'r')
 		user_name = user_info.readline()
 		user_pass = user_info.readline()
 		user_tele = user_info.readline()
