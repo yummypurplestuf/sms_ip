@@ -10,6 +10,7 @@ from googlevoice import Voice
 #from googlevoice.util import input
 import netifaces
 import sys
+import os
 
 
 # netifaces is not a built in Python Library: easy_install netifaces
@@ -33,7 +34,7 @@ if connection == True:
 		# 3333333333, 3333333333, 3333333333
 
 		# MUST SET ABSOLUTE PATH FOR user_info.txt 
-		user_info = open('/home/pi/sms_ip/user_info.txt', 'r')
+		user_info = open(str(os.getcwd())+'/user_info.txt', 'r')
 		user_name = user_info.readline()
 		user_pass = user_info.readline()
 		user_tele = user_info.readline()
