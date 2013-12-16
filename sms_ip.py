@@ -34,7 +34,8 @@ if connection == True:
 		# 3333333333, 3333333333, 3333333333
 
 		# MUST SET ABSOLUTE PATH FOR user_info.txt 
-		user_info = open(str(os.getcwd())+'/user_info.txt', 'r')
+		print os.getcwd()+'/user_info.txt'
+		user_info = open(os.getcwd()+'/user_info.txt', 'r')
 		user_name = user_info.readline()
 		user_pass = user_info.readline()
 		user_tele = user_info.readline()
