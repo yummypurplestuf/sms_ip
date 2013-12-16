@@ -10,10 +10,8 @@ from googlevoice import Voice
 #from googlevoice.util import input
 import netifaces
 import sys
-import time
 
 
-time.sleep(10) # Allows for the system to boot and obtain an IP address
 # netifaces is not a built in Python Library: easy_install netifaces
 interfaces = netifaces.interfaces()
 voice = Voice()
@@ -42,7 +40,8 @@ if connection == True:
 		user_info.close()
 		voice.login(user_name, user_pass)
 		phoneNumber = user_tele
-		text = str(ip_addr)
+		text = 'RaspberryPi\n\n'+'IP: '+str(ip_addr)
+		print len(text)
 	except:
 		print 'failed to send IP'
 		sys.exit(1)
