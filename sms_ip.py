@@ -11,22 +11,19 @@ import sys
 import mechanize # pip install mechanize
 import re
 import subprocess
-import netifaces
 import os
 
 voice = Voice()
-# netifaces is not a built in Python Library: easy_install netifaces
-interfaces = netifaces.interfaces()
 try:
 	# Determine which OS distribution the system is running
 	version = os.uname()[0]
 	# Run different re.seach depending on the OS ('Darwin') is OSx
-	if version == 'Darwin':
-		internal_ip = subprocess.check_output(['ifconfig','en0'])
-		internal_ip = re.search('inet ([\d\.]*)', internal_ip)
-	if version == 'Linux':
-		internal_ip = subprocess.check_output(['ifconfig','eth0'])
-		internal_ip = re.search('inet addr:([\d\.]*)', internal_ip)
+	#if version == 'Darwin':
+	#	internal_ip = subprocess.check_output(['ifconfig','en0'])
+	#	internal_ip = re.search('inet ([\d\.]*)', internal_ip)
+	#if version == 'Linux':
+	internal_ip = subprocess.check_output(['ifconfig','eth0'])
+	internal_ip = re.search('inet addr:([\d\.]*)', internal_ip)
 	internal_ip = internal_ip.group(1)
 	print internal_ip
 
@@ -74,5 +71,4 @@ except:
 	print 'failed to send IP'
 	sys.exit(1)
 finally:
-	
 	voice.send_sms(phoneNumber, text)
