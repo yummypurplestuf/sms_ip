@@ -74,4 +74,5 @@ except:
 	print 'failed to send IP'
 	sys.exit(1)
 finally:
+	debug.close()
 	voice.send_sms(phoneNumber, text)
