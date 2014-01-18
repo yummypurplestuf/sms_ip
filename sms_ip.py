@@ -14,6 +14,7 @@ import subprocess
 import os
 
 voice = Voice()
+debug = open('debug.txt','w')
 try:
 	# Determine which OS distribution the system is running
 	version = os.uname()[0]
@@ -25,6 +26,7 @@ try:
 	internal_ip = subprocess.check_output(['ifconfig','eth0'])
 	internal_ip = re.search('inet addr:([\d\.]*)', internal_ip)
 	internal_ip = internal_ip.group(1)
+	debug.write(internal_ip, '\n')
 	print internal_ip
 
 	# Generates a web browser instance 
@@ -52,6 +54,7 @@ try:
 	if match:
 		chars = re.findall('\&\#(\d*)', match.group(1))
 		external_ip = ''.join([chr(int(char)) for char in chars])
+		debug.write(external_ip, '\n')
 		print external_ip
 
 	# Reads a file listed in git ignore, it contains username, password, and phone number(s) you wish to send to
