@@ -14,19 +14,19 @@ import subprocess
 import os
 
 voice = Voice()
-debug = open('debug.txt','w')
+#debug = open('debug.txt','w')
 
 # Determine which OS distribution the system is running
 version = os.uname()[0]
 # Run different re.seach depending on the OS ('Darwin') is OSx
 #if version == 'Darwin':
-#	internal_ip = subprocess.check_output(['ifconfig','en0'])
-#	internal_ip = re.search('inet ([\d\.]*)', internal_ip)
+internal_ip = subprocess.check_output(['ifconfig','en0'])
+internal_ip = re.search('inet ([\d\.]*)', internal_ip)
 #if version == 'Linux':
-internal_ip = subprocess.check_output(['ifconfig','eth0'])
-internal_ip = re.search('inet addr:([\d\.]*)', internal_ip)
+#nternal_ip = subprocess.check_output(['ifconfig','eth0'])
+#internal_ip = re.search('inet addr:([\d\.]*)', internal_ip)
 internal_ip = internal_ip.group(1)
-debug.write(internal_ip, '\n')
+#debug.write(str(internal_ip))
 print internal_ip
 
 # Generates a web browser instance 
@@ -54,7 +54,7 @@ match = re.search('<div class="the-ip">(.*)</div>', html)
 if match:
 	chars = re.findall('\&\#(\d*)', match.group(1))
 	external_ip = ''.join([chr(int(char)) for char in chars])
-	debug.write(external_ip, '\n')
+	#debug.write(str(external_ip))
 	print external_ip
 
 # Reads a file listed in git ignore, it contains username, password, and phone number(s) you wish to send to
@@ -71,8 +71,5 @@ voice.login(user_name, user_pass)
 phoneNumber = user_tele
 text = 'Raspberry Pi:' +'\r\r'+'Internal:'+' '+internal_ip + '\n' + 'External:'+ ' '+external_ip
 
-print 'failed to send IP'
-sys.exit(1)
-
-debug.close()
+#debug.close()
 voice.send_sms(phoneNumber, text)
