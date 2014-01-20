@@ -20,11 +20,11 @@ voice = Voice()
 version = os.uname()[0]
 # Run different re.seach depending on the OS ('Darwin') is OSx
 #if version == 'Darwin':
-internal_ip = subprocess.check_output(['ifconfig','en0'])
-internal_ip = re.search('inet ([\d\.]*)', internal_ip)
+#internal_ip = subprocess.check_output(['ifconfig','en0'])
+#internal_ip = re.search('inet ([\d\.]*)', internal_ip)
 #if version == 'Linux':
-#nternal_ip = subprocess.check_output(['ifconfig','eth0'])
-#internal_ip = re.search('inet addr:([\d\.]*)', internal_ip)
+internal_ip = subprocess.check_output(['ifconfig','eth0'])
+internal_ip = re.search('inet addr:([\d\.]*)', internal_ip)
 internal_ip = internal_ip.group(1)
 #debug.write(str(internal_ip))
 print internal_ip
