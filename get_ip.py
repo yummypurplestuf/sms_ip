@@ -1,10 +1,11 @@
+#!/usr/bin/python
 """
 
 Author: Jared R. Luellen
 This repo is located at: https://github.com/jluellen/sms_ip
 Sends current internal and external IP on boot
 Add to cron by: sudo crontab -e
-Append: @reboot python /home/pi/MyScript.py &
+Append: @reboot python /home/pi/get_ip.py &
 Save crontab
 Reboot device and test
 
@@ -86,7 +87,6 @@ def send_text(text):
 	user_info.close()
 	voice.login(user_name, user_pass)
 	phoneNumber = user_tele
-
 	voice.send_sms(phoneNumber, text)
 
 
