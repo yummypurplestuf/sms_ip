@@ -36,16 +36,13 @@ def get_os():
 
 def get_internal_ip(version):
 	if version == 'Darwin':
-		internal_ip = subprocess.check_output(['ifconfig','en0'], 
-			shell=True,
-			stderr=subprocess.STDOUT)
+		internal_ip = subprocess.check_output(['/sbin/ifconfig','en0'])
 		print internal_ip
 		internal_ip = re.search('inet ([\d\.]*)', internal_ip)
-		internal_ip = internal_ip.group(1)
 	if version == 'Linux':
-		internal_ip = subprocess.check_output(['ifconfig','eth0'])
+		internal_ip = subprocess.check_output(['/sbin/ifconfig','eth0'])
 		internal_ip = re.search('inet addr:([\d\.]*)', internal_ip)
-		internal_ip = internal_ip.group(1)
+	internal_ip = internal_ip.group(1)
 	return internal_ip
 
 def get_external_ip():
@@ -83,7 +80,7 @@ def send_text(text):
 	# email@gmail.com
 	# YOUR_PASSWORD
 	# 3333333333, 3333333333, 3333333333
-	user_info = open('user_info.txt', 'r')
+	user_info = open('/home/pi/sms_ip/user_info.txt', 'r')
 	user_name = user_info.readline()
 	user_pass = user_info.readline()
 	user_tele = user_info.readline()
