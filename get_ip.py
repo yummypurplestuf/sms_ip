@@ -1,6 +1,7 @@
 """
 
 Author: Jared R. Luellen
+This repo is located at: https://github.com/jluellen/sms_ip
 Sends current internal and external IP on boot
 Add to cron by: sudo crontab -e
 Append: @reboot python /home/pi/MyScript.py &
@@ -18,6 +19,14 @@ import mechanize
 
 
 voice = Voice()
+
+def main():
+	version = get_os()
+	internal_ip = get_internal_ip(version)
+	external_ip = get_external_ip()
+	text = 'Raspberry Pi: \r\r' + 'Internal: ' + internal_ip + '\n' + 'External: ' + external_ip 
+	print text
+	send_text(text)
 
 def get_os():
 	# Determine which OS distribution the system is running
@@ -79,16 +88,6 @@ def send_text(text):
 	phoneNumber = user_tele
 
 	voice.send_sms(phoneNumber, text)
-
-def main():
-	version = get_os()
-
-	internal_ip = get_internal_ip(version)
-	external_ip = get_external_ip()
-	text = 'Raspberry Pi: \r\r' + 'Internal: ' + internal_ip + '\n' + 'External: ' + external_ip 
-	print text
-	send_text(text)
-
 
 
 if __name__ == "__main__": main()
