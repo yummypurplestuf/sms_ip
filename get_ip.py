@@ -36,7 +36,10 @@ def get_os():
 
 def get_internal_ip(version):
 	if version == 'Darwin':
-		internal_ip = subprocess.check_output(['ifconfig','en0'])
+		internal_ip = subprocess.check_output(['ifconfig','en0'], 
+			shell=True,
+			stderr=subprocess.STDOUT)
+		print internal_ip
 		internal_ip = re.search('inet ([\d\.]*)', internal_ip)
 		internal_ip = internal_ip.group(1)
 	if version == 'Linux':
