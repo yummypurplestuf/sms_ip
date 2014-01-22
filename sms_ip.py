@@ -17,7 +17,7 @@ voice = Voice()
 #debug = open('debug.txt','w')
 
 # Determine which OS distribution the system is running
-version = os.uname()[0]
+#version = os.uname()[0]
 # Run different re.seach depending on the OS ('Darwin') is OSx
 #if version == 'Darwin':
 #internal_ip = subprocess.check_output(['ifconfig','en0'])
